@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+        <style>
+        body, html {
+
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+         header {
+            background-color: #333;
+            color: #fff; /* 텍스트 색상 설정 */
+            padding: 10px;
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+        }
+
+        .half {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Optional: Add styles for better appearance */
+        .half:nth-child(odd) {
+            position: relative;
+            border-right: 5px solid #333;
+
+        }
+         .half:nth-child(odd)::before{
+            content: "";
+            background-image: url("{% static 'image01.jpg' %}");
+            background-size: cover;
+            opacity: 0.5;
+            position: absolute;
+            filter: blur(5px);
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: -1;
+        }
+         .half:nth-child(odd).h1{
+             color: black;
+            text-align: center;
+            line-height: 300px;
+            position: relative;
+         }
+
+
+        .half:nth-child(even) {/*오른쪽*/
+            position: relative;
+
+        }
+        .half:nth-child(even)::before{
+            content: "";
+            background-image: url("{% static 'image02.jpg' %}");
+            background-size: cover; /* 배경 이미지를 컨테이너에 맞게 조절 */
+            opacity: 0.5;
+            position: absolute;
+            filter: blur(5px);
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: -1;
+        }
+         .half:nth-child(even).h1{
+             color: black;
+            text-align: center;
+            line-height: 300px;
+            position: relative;
+         }
+
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+            font-size: xxx-large;
+
+        }
+        .button-container {
+            text-align: center;
+            width: 100%;
+        }
+        button {
+            padding: 100px;
+            font-size: 80px;
+            cursor: pointer;
+            width: 100%;
+            max-width: none;
+            height: 100%; /* 높이를 추가하여 정사각형으로 만듭니다. */
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .login-btn, .signup-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+
+        </ul>
+        <div>
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a>
+                <a href="{% url 'common:signup' %}" class="signup-btn">마이페이지</a>
+                {% else %}
+                <a href="{% url 'common:login' %}" class="login-btn">로그인</a>
+                <a href="{% url 'common:signup' %}" class="signup-btn">회원가입</a>
+                {% endif %}
+
+        </div>
+    </nav>
+</header>
+
+
+</div>
+
+<div class="container">
+    <div class="half">
+        <h1>너의 대학을 찾아!</h1>
+        <div style=" text-align: center;">
+	        <button id="universityBtn" onclick="checkLogin()">클릭</button>
+        </div>
+    </div>
+    <div class="half">
+        <h1>너의 직장을 찾아!</h1>
+        <div style=" text-align: center;">
+	        <button id="jobBtn" onclick="checkLogin()">클릭</button>
+        </div>
+    </div>
+</div>
+<script>
+
+        document.querySelector(".half:nth-child(odd)").onclick = function () {
+        location.href = "univBT";
+        };
+
+        document.querySelector(".half:nth-child(even)").onclick = function () {
+        location.href = "comBT";
+        };
+    </script>
+</body>
+</html>

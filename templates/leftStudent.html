@@ -1,0 +1,268 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+
+        <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+         header {
+            background-color: #333; /* 네비게이션 바의 배경색 설정 */
+            color: #fff; /* 텍스트 색상 설정 */
+            padding: 10px; /* 네비게이션 바의 상단/하단 여백 설정 */
+            text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        nav li {
+            margin: 0 10px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+        }
+
+        .half {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .background {
+            content: "";
+            background-image: url("{% static 'image01.jpg' %}");
+            background-size: cover; /* 배경 이미지를 컨테이너에 맞게 조절 */
+            opacity: 0.5;
+            filter: blur(5px);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            position: absolute;
+            z-index: -1;
+        }
+
+        .rectangle {
+            width: 50%; /* 사각형의 너비 */
+            height: 100%; /* 사각형의 높이 */
+            background-color: white; /* 사각형의 배경색 */
+            border: 2px solid white; /* 사각형의 테두리 스타일 및 색상 */
+            opacity: 0.6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+
+        }
+        .rectangle::before{
+             opacity: 0.5;
+            filter: blur(5px);
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            z-index: -1;
+            text-align: center;
+        }
+        .rectangle h1{
+            color: black;
+            text-align: center;
+            line-height: 300px;
+            position: relative;
+        }
+
+
+        h1 {
+            text-align: center;
+            font-weight: bold;
+            color: #000;
+            font-size: xxx-large;
+
+        }
+        .button-container {
+            text-align: center;
+            width: 100%;
+        }
+        .text {
+            font-size: 35px; /* Adjust as needed */
+            margin-bottom: 20px; /* Add some space between text and dropdown */
+            color: black;
+
+        }
+        .dropdown {
+            width: 80%; /* Adjust as needed */
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 40px;
+            font-size: 30px;
+            cursor: pointer;
+            width: 100%;
+            height: 100%; /* 높이를 추가하여 정사각형으로 만듭니다. */
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            display: inline-block;
+            line-height: 100%;
+            bottom: 50%;
+
+        }
+        .login-btn, .signup-btn {
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+
+        </ul>
+        <div>
+                {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'common:logout' %}">로그아웃</a>
+                <a href="{% url 'common:signup' %}" class="signup-btn">마이페이지</a>
+                {% else %}
+                <a href="{% url 'common:login' %}" class="login-btn">로그인</a>
+                <a href="{% url 'common:signup' %}" class="signup-btn">회원가입</a>
+                {% endif %}
+
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="half">
+        <div class="background"></div>
+        <div class="rectangle">
+            <div class="text">학교를 선택하시오.</div>
+                <select class="dropdown">
+                    <option value="option1">경희대학교</option>
+                    <option value="option1">서울대학교</option>
+                    <option value="option1">한국과학기술원</option>
+                    <option value="option1">고려대학교</option>
+                    <option value="option1">연세대학교</option>
+                    <option value="option1">포항공과대학교</option>
+                    <option value="option1">성균관대학교</option>
+                    <option value="option1">한양대학교</option>
+                    <option value="option1">경희대학교</option>
+                    <option value="option1">울산과학기술원</option>
+                    <option value="option1">서강대학교</option>
+                    <option value="option1">광주과학기술원</option>
+                    <option value="option1">경북대학교</option>
+                    <option value="option1">이화여자대학교</option>
+                    <option value="option1">중앙대학교</option>
+                    <option value="option1">울산대학교</option>
+                    <option value="option1">아주대학교</option>
+
+                </select>
+                <select class="dropdown">
+                    <option value="option1">서울대학교</option>
+                    <option value="option1">한국과학기술원</option>
+                    <option value="option1">고려대학교</option>
+                    <option value="option1">연세대학교</option>
+                    <option value="option1">포항공과대학교</option>
+                    <option value="option1">성균관대학교</option>
+                    <option value="option1">한양대학교</option>
+                    <option value="option1">경희대학교</option>
+                    <option value="option1">울산과학기술원</option>
+                    <option value="option1">서강대학교</option>
+                    <option value="option1">광주과학기술원</option>
+                    <option value="option1">경북대학교</option>
+                    <option value="option1">이화여자대학교</option>
+                    <option value="option1">중앙대학교</option>
+                    <option value="option1">울산대학교</option>
+                    <option value="option1">아주대학교</option>
+
+                </select>
+                <select class="dropdown">
+                    <option value="option1">한국과학기술원</option>
+                    <option value="option1">서울대학교</option>
+                    <option value="option1">고려대학교</option>
+                    <option value="option1">연세대학교</option>
+                    <option value="option1">포항공과대학교</option>
+                    <option value="option1">성균관대학교</option>
+                    <option value="option1">한양대학교</option>
+                    <option value="option1">경희대학교</option>
+                    <option value="option1">울산과학기술원</option>
+                    <option value="option1">서강대학교</option>
+                    <option value="option1">광주과학기술원</option>
+                    <option value="option1">경북대학교</option>
+                    <option value="option1">이화여자대학교</option>
+                    <option value="option1">중앙대학교</option>
+                    <option value="option1">울산대학교</option>
+                    <option value="option1">아주대학교</option>
+                </select>
+            <br></br>
+            <div class="text">학과를 선택하시오.</div>
+                <select class="dropdown">
+                    <option value="option1">언어.문학</option>
+                    <option value="option1">전기.전자.컴퓨터</option>
+                    <option value="option1">사회과학</option>
+                    <option value="option1">수학.물리.천문.지구</option>
+                    <option value="option1">화학.생명과학.환경</option>
+                    <option value="option1">화공.고분자.에너지</option>
+                    <option value="option1">교통.수송</option>
+                    <option value="option1">응용예술</option>
+                    <option value="option1">무용.체육</option>
+                    <option value="option1">연극.영화</option>
+                    <option value="option1">약학</option>
+                    <option value="option1">농림.수산</option>
+                    <option value="option1">교육</option>                </select>
+            <br></br>
+            <br></br>
+            <div style=" text-align: center;">
+	            <button>매칭</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
